@@ -6,7 +6,7 @@ import React from 'react'
 
 interface SelectProps {
   value?: string
-  options: string[]
+  options: readonly string[]
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(function Select(

@@ -19,6 +19,7 @@ module.exports = {
       gray: '#939393',
       metal: '#707786',
       border: '#D5D5D5',
+      danger: '#FF453A',
       chip: {
         background: '#F4F4F6',
         color: '#1F2937',
