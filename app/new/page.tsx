@@ -1,57 +1,35 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { TrashIcon } from '@radix-ui/react-icons'
+import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
-import { undefined, z } from 'zod'
+import { z } from 'zod'
 
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { Select } from '@/components/Select'
+import dimensions from '@/public/icons/dimensions.svg'
+import sawn from '@/public/icons/sawn.svg'
+import specs from '@/public/icons/specs.svg'
+import { Product, productSchema, options } from '@/app/new/schema'
 
-// Some random options for the selects (probably I butchered some of them)
-const usageOptions = ['Flooring', 'Decking', 'Timber screens', 'Cladding'] as const
-const speciesOptions = ['Alder', 'Cedar', 'Mahogany', 'Oak'] as const
-const dryingOptions = ['Air dried', 'Kiln dried'] as const
-const gradeOptions = ['A', 'A1', 'A2', 'A3', 'A4', 'B', 'AB', 'C', 'D'] as const
-const treatmentOptions = ['Oil', 'Stain and dye', 'Preserver', 'Varnish', 'Paint'] as const
-
-const productSchema = z.object({
-  usage: z.enum(usageOptions).optional(),
-  species: z.enum(speciesOptions).optional(),
-  dryingMethod: z.enum(dryingOptions).optional(),
-  grade: z.enum(gradeOptions).optional(),
-  treatment: z.enum(treatmentOptions).optional(),
-  dimensions: z.array(
-    z.object({
-      thickness: z.number().optional(),
-      width: z.number().optional(),
-      length: z.number().optional(),
-    })
-  ),
-})
-
-type ProductType = z.infer<typeof productSchema>
-
-const onSubmit = (product: ProductType) => {
+const onSubmit = (product: Product) => {
   console.log('onSubmit', product)
 }
 export default function CreateProduct() {
+  const { usage, species, drying, grade, treatment } = options
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors, isSubmitting, isSubmitted, isDirty, isValid },
-  } = useForm<ProductType>({
+    formState: { isSubmitting, isSubmitted, isDirty, isValid },
+  } = useForm<Product>({
     mode: 'onChange',
     resolver: zodResolver(productSchema), // Configuration the validation with the zod schema.
     defaultValues: {
-      usage: undefined,
-      species: undefined,
-      dryingMethod: undefined,
-      grade: undefined,
-      treatment: undefined,
-      dimensions: [{ thickness: undefined, width: undefined, length: undefined }],
+      dimensions: [{}],
     },
   })
 
@@ -61,81 +39,117 @@ export default function CreateProduct() {
   })
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={'flex gap-2 flex-col'}>
-      <p className={'text-2xl'}>Sawn Timber</p>
-      <div className={'grid grid-cols-1 gap-8 p-4 tablet:grid-cols-2'}>
-        <Controller
-          name={'usage'}
-          control={control}
-          render={({ field }) => <Select options={usageOptions} {...field} />}
-        />
-        <Controller
-          name={'species'}
-          control={control}
-          render={({ field }) => <Select options={speciesOptions} {...field} />}
-        />
-      </div>
-      <p className={'text-2xl'}>Specifications</p>
-      <div className={'grid grid-cols-1 gap-8 p-4 tablet:grid-cols-3'}>
-        <Controller
-          name={'dryingMethod'}
-          control={control}
-          render={({ field }) => <Select options={dryingOptions} {...field} />}
-        />
-        <Controller
-          name={'grade'}
-          control={control}
-          render={({ field }) => <Select options={gradeOptions} {...field} />}
-        />
-        <Controller
-          name={'treatment'}
-          control={control}
-          render={({ field }) => <Select options={treatmentOptions} {...field} />}
-        />
-      </div>
-      <div className={'flex justify-between items-center'}>
-        <p className={'text-2xl'}>Dimensions</p>
-        <Button
-          variant={'ghost'}
-          onClick={() => append({ thickness: undefined, length: undefined, width: undefined })}
-          className={'text-primary-dark hover:text-primary active:text-primary-dark'}>
-          + Add another set
-        </Button>
-      </div>
-
-      {fields.map((field, index) => {
-        const isRemovable = index > 0
-        return (
-          <div key={field.id} className={'flex flex-1 items-center px-4 gap-8'}>
-            <div className={'grid grid-cols-1 gap-8 tablet:grid-cols-3 w-full'}>
-              <Input
-                type={'number'}
-                {...register(`dimensions.${index}.thickness`, { valueAsNumber: true })}
-                defaultValue={field.thickness}
-              />
-              <Input
-                type={'number'}
-                {...register(`dimensions.${index}.width`, { valueAsNumber: true })}
-                defaultValue={field.width}
-              />
-              <Input
-                type={'number'}
-                {...register(`dimensions.${index}.length`, { valueAsNumber: true })}
-                defaultValue={field.length}
-              />
-            </div>
-            {isRemovable ? (
-              <TrashIcon
-                className={'transition ease-in duration-100 w-6 h-6 cursor-pointer hover:text-danger'}
-                onClick={() => remove(index)}
-              />
-            ) : (
-              <div className={'w-6 h-6'} />
-            )}
+    <div className={'flex flex-col gap-2 divide-y divide-border px-4 pt-4'}>
+      <span className={'text-2xl'}>Create Product</span>
+      <form onSubmit={handleSubmit(onSubmit)} className={'flex flex-col gap-10 divide-y divide-border'}>
+        <div className={'flex flex-col items-start gap-5 pt-10'}>
+          <div className={'flex w-full gap-4'}>
+            <Image src={sawn} alt={'Sawn Timber'} className={'mt-3 h-8 w-8'} />
+            <span className={'text-2xl'}>Sawn Timber</span>
           </div>
-        )
-      })}
-      <Button type={'submit'}>Create Product</Button>
-    </form>
+          <div className={'grid w-full grid-cols-1 gap-8 tablet:grid-cols-2 tablet:pl-12'}>
+            <Controller
+              name={'usage'}
+              control={control}
+              render={({ field }) => (
+                <Select
+                  label={'Usage *'}
+                  helper={'This will help us find what fits best to your needs.'}
+                  options={usage}
+                  {...field}
+                />
+              )}
+            />
+            <Controller
+              name={'species'}
+              control={control}
+              render={({ field }) => <Select label={'Wood species *'} options={species} {...field} />}
+            />
+          </div>
+        </div>
+
+        <div className={'flex flex-col items-start gap-5 pt-10'}>
+          <div className={'flex w-full gap-4'}>
+            <Image src={specs} alt={'Specifications'} className={'mt-3 h-8 w-8'} />
+            <span className={'text-2xl'}>Specifications</span>
+          </div>
+          <div className={'grid w-full grid-cols-1 gap-8 tablet:grid-cols-3 tablet:pl-12'}>
+            <Controller
+              name={'drying_method'}
+              control={control}
+              render={({ field }) => <Select label={'Drying *'} options={drying} {...field} />}
+            />
+            <Controller
+              name={'grade'}
+              control={control}
+              render={({ field }) => <Select label={'Grade *'} options={grade} {...field} />}
+            />
+            <Controller
+              name={'treatment'}
+              control={control}
+              render={({ field }) => <Select label={'Treatment *'} options={treatment} {...field} />}
+            />
+          </div>
+        </div>
+
+        <div className={'flex flex-col items-start gap-5 pt-10'}>
+          <div className={'flex w-full gap-4'}>
+            <Image src={dimensions} alt={'Specifications'} className={'mt-3 h-8 w-8'} />
+            <div className={'flex w-full items-center justify-between'}>
+              <span className={'text-2xl'}>Dimensions</span>
+              <Button
+                variant={'ghost'}
+                onClick={() => append({})}
+                className={'text-primary-dark hover:text-primary active:text-primary-dark'}>
+                + Add another set
+              </Button>
+            </div>
+          </div>
+          <div className={'grid w-full gap-8 tablet:pl-12'}>
+            {fields.map((field, index) => {
+              const isRemovable = index > 0
+              return (
+                <div key={field.id} className={'relative flex w-full flex-1 items-end gap-4'}>
+                  {isRemovable && (
+                    <Button danger onClick={() => remove(index)} className={'absolute -left-14 px-1'}>
+                      <TrashIcon className={'h-6 w-6'} />
+                    </Button>
+                  )}
+                  <div className={'grid w-full grid-cols-1 gap-8 tablet:grid-cols-3'}>
+                    <Input
+                      label={'Thickness *'}
+                      type={'number'}
+                      {...register(`dimensions.${index}.thickness`, { valueAsNumber: true })}
+                      defaultValue={field.thickness}
+                    />
+                    <Input
+                      label={'Width *'}
+                      type={'number'}
+                      {...register(`dimensions.${index}.width`, { valueAsNumber: true })}
+                      defaultValue={field.width}
+                    />
+                    <Input
+                      label={'Length *'}
+                      type={'number'}
+                      {...register(`dimensions.${index}.length`, { valueAsNumber: true })}
+                      defaultValue={field.length}
+                    />
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
+        <div className={'flex justify-between bg-primary'}>
+          <Link href={'/'}>
+            <Button variant={'ghost'}>Close</Button>
+          </Link>
+          <Button type={'submit'} disabled={!isValid || isSubmitting}>
+            Create Product
+          </Button>
+        </div>
+      </form>
+    </div>
   )
 }

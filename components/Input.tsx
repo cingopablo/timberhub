@@ -1,6 +1,7 @@
 import React from 'react'
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string
   value?: string | number | undefined
   className?: string
   addonStart?: React.ReactElement
@@ -8,14 +9,21 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
-  { value, addonStart, addonEnd, disabled, className, ...other },
+  { label, value, addonStart, addonEnd, disabled, className, ...other },
   ref
 ) {
   return (
-    <div className={`${styles.root} ${className}`}>
-      {addonStart ? <div className={`${styles.addon} rounded-l-md mr-4`}>{addonStart}</div> : null}
-      <input ref={ref} value={value} disabled={disabled} className={styles.input} {...other} />
-      {addonEnd ? <div className={`${styles.addon} rounded-r-md ml-4`}>end</div> : null}
+    <div className={'flex flex-col gap-1'}>
+      {label && (
+        <label htmlFor={label} className={'text-lg'}>
+          {label}
+        </label>
+      )}
+      <div className={`${styles.root} ${className}`}>
+        {addonStart ? <div className={`${styles.addon} mr-4 rounded-l-md`}>{addonStart}</div> : null}
+        <input id={label} ref={ref} value={value} disabled={disabled} className={styles.input} {...other} />
+        {addonEnd ? <div className={`${styles.addon} ml-4 rounded-r-md`}>end</div> : null}
+      </div>
     </div>
   )
 })

@@ -5,15 +5,17 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string
   disabled?: boolean
   variant?: 'primary' | 'secondary' | 'ghost'
+  danger?: boolean
 }
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, className, variant = 'primary', disabled = false, ...props }, ref) => (
+  ({ children, className, variant = 'primary', disabled = false, danger = false, ...props }, ref) => (
     <button
       ref={ref}
       disabled={disabled}
       className={`
         ${styles.base}
         ${styles.variant[variant]}
+        ${danger && styles.danger}
         ${disabled && styles.disabled}
         ${className}
       `}
@@ -29,32 +31,33 @@ const styles = {
   variant: {
     primary: `
       bg-primary
-      hover:bg-primary-light
-      hover:text-metal
-      focus:bg-primary-light
-      focus:text-metal
-      active:bg-primary
-      active:text-black
-      disabled:bg-primary
+      enabled:hover:bg-primary-light
+      enabled:hover:text-metal
+      enabled:focus:bg-primary-light
+      enabled:focus:text-metal
+      enabled:active:bg-primary
+      enabled:active:text-black
     `,
     secondary: `
       ring-2
       ring-inset
       ring-primary
-      hover:ring-primary-light
-      hover:text-metal
-      focus:ring-primary-light
-      focus:text-metal
-      active:ring-primary
-      active:text-black
+      enabled:hover:ring-primary-light
+      enabled:hover:text-metal
+      enabled:focus:ring-primary-light
+      enabled:focus:text-metal
+      enabled:active:ring-primary
+      enabled:active:text-black
       disabled:ring-primary
       disabled:text-metal
     `,
     ghost: `
-      hover:text-gray
-      focus:text-gray
-      active:text-black
+      enabled:hover:text-primary-light
+      enabled:focus:text-primary-light
+      enabled:active:text-black
       disabled:text-gray
     `,
   },
+  danger:
+    'bg-danger text-white enabled:hover:bg-danger/80 enabled:hover:text-white/80 enabled:active:bg-danger enabled:active:text-white',
 }

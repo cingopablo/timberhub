@@ -1,3 +1,5 @@
+'use client'
+
 import { Dialog } from '@headlessui/react'
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
@@ -7,28 +9,38 @@ import React from 'react'
 import { fetchData, saveData } from '@/api/data'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
-import { Select } from '@/components/Select'
+import { Table, TableProduct } from '@/components/Table/Table'
+import useSWR, { Fetcher } from 'swr'
 
-const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
+const fetcher: Fetcher<TableProduct, string> = (...args) => fetch(...args).then(res => res.json())
 
-export default async function Home() {
+export default function Home() {
   // const [value, setValue] = React.useState<string | undefined>(undefined)
+  const { data, error, isLoading } = useSWR('/api', fetcher)
+  const [search, setSearch] = React.useState('')
+
+  console.log(data)
   // const products = await fetchData()
+  const products: TableProduct = []
 
   return (
-    <main className={'flex min-h-screen flex-col px-6'}>
-      <div className={'flex justify-between items-center pt-6 pb-8'}>
-        <p className={'text-2xl'}>All Products</p>
+    <main className={'flex  flex-col px-6'}>
+      <div className={'flex items-center justify-between pb-8 pt-6'}>
+        <span className={'text-2xl'}>All Products</span>
         <Link href={'/new'}>
           <Button variant={'secondary'}>+ Create Product</Button>
         </Link>
       </div>
       <Input
         placeholder={'Search'}
-        addonStart={<MagnifyingGlassIcon className={'w-4 h-4'} />}
+        addonStart={<MagnifyingGlassIcon className={'h-4 w-4'} />}
         className={'shadow-default'}
-        // onChange={value => console.log(value.target.value)}
+        value={search}
+        onChange={event => setSearch(event.target.value)}
       />
+
+      <Table products={products} className={'pt-8'} />
+
       {/*{products.map(product => (*/}
       {/*  <div key={product.id}>{JSON.stringify(product, null, 2)}</div>*/}
       {/*))}*/}
@@ -45,29 +57,4 @@ export default async function Home() {
 
 // <div className={'flex gap-2 max-w-2xl p-4'}>
 //   <Input type={'number'} />
-// </div>
-// <div className={'grid grid-cols-1 gap-2 p-4 tablet:grid-cols-3'}>
-//   <Select value={value} options={options} onChange={setValue} />
-//   <Select value={value} options={options} onChange={setValue} />
-//   <Select value={value} options={options} onChange={setValue} />
-// </div>
-// <div className={'grid grid-cols-1 gap-2 p-4 tablet:grid-cols-3'}>
-// <div className={'relative'}>
-//   <table className={'table-auto w-full text-sm text-left text-gray'}>
-//     <thead className={'text-xs text-gray dark:text-gray'}>
-//       <tr>
-//         <th>Product (Species, Grade, Drying)</th>
-//         <th>Dimensions (ThicknessxWidth)</th>
-//       </tr>
-//     </thead>
-//     <tbody>
-//       <tr className={'bg-white  dark:bg-gray-800 dark:border-gray-700'}>
-//         <th scope={'row'} className={'px-6 py-4 font-medium text-gray whitespace-nowrap'}>
-//           Apple MacBook Pro 17
-//         </th>
-//         <td className={'px-6 py-4'}>Silver</td>
-//       </tr>
-//     </tbody>
-//   </table>
-// </div>
 // </div>
