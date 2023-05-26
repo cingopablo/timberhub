@@ -160,7 +160,7 @@ export default function CreateProduct() {
           </div>
         </div>
 
-        <div className={'flex justify-between pt-40'}>
+        <div className={'flex justify-between pb-40 pt-40'}>
           <Link href={'/'}>
             <Button variant={'ghost'}>Close</Button>
           </Link>

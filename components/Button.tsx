@@ -14,8 +14,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       disabled={disabled}
       className={`
         ${styles.base}
-        ${styles.variant[variant]}
-        ${danger && styles.danger}
+        ${!danger ? styles.variant[variant] : styles.danger}
         ${disabled && styles.disabled}
         ${className}
       `}
@@ -58,6 +57,5 @@ const styles = {
       disabled:text-gray
     `,
   },
-  danger:
-    'bg-danger text-white enabled:hover:bg-danger/80 enabled:hover:text-white/80 enabled:active:bg-danger enabled:active:text-white',
+  danger: 'text-danger enabled:hover:text-danger/60 enabled:active:text-danger enabled:active:text-danger/60',
 }
