@@ -1,27 +1,25 @@
 'use client'
-
-import { Dialog } from '@headlessui/react'
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import React from 'react'
+import useSWR from 'swr'
 
-import { fetchData, saveData } from '@/api/data'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
-import { Table, TableProduct } from '@/components/Table/Table'
-import useSWR, { Fetcher } from 'swr'
-
-const fetcher: Fetcher<TableProduct, string> = (...args) => fetch(...args).then(res => res.json())
+import { Table } from '@/components/Table/Table'
+import { TableLoading } from '@/components/Table/TableLoading'
+import { fetcher } from '@/utils/utils'
 
 export default function Home() {
-  // const [value, setValue] = React.useState<string | undefined>(undefined)
-  const { data, error, isLoading } = useSWR('/api', fetcher)
+  const { data: products, isLoading } = useSWR('/api', fetcher)
   const [search, setSearch] = React.useState('')
 
-  console.log(data)
-  // const products = await fetchData()
-  const products: TableProduct = []
+  const filteredProducts = products?.filter(
+    product =>
+      product.species?.toLowerCase().includes(search.trim()) ||
+      product.grade?.toLowerCase().includes(search.trim()) ||
+      product.drying_method?.toLowerCase().includes(search.trim())
+  )
 
   return (
     <main className={'flex  flex-col px-6'}>
@@ -34,27 +32,12 @@ export default function Home() {
       <Input
         placeholder={'Search'}
         addonStart={<MagnifyingGlassIcon className={'h-4 w-4'} />}
-        className={'shadow-default'}
+        className={'pb-8'}
+        classNameInput={'shadow-default'}
         value={search}
         onChange={event => setSearch(event.target.value)}
       />
-
-      <Table products={products} className={'pt-8'} />
-
-      {/*{products.map(product => (*/}
-      {/*  <div key={product.id}>{JSON.stringify(product, null, 2)}</div>*/}
-      {/*))}*/}
+      {filteredProducts && !isLoading ? <Table products={filteredProducts} /> : <TableLoading />}
     </main>
   )
 }
-
-// <div className={'flex gap-2 max-w-2xl'}>
-//   {items.slice(0, 3).map(el => (
-//     <Chip key={el} label={'16x1050'} count={el} />
-//   ))}
-//   {items.length > 3 ? <Chip label={'+ 5 more sets'} /> : null}
-// </div>
-
-// <div className={'flex gap-2 max-w-2xl p-4'}>
-//   <Input type={'number'} />
-// </div>

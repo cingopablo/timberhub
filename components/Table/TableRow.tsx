@@ -7,6 +7,7 @@ import sawn from '@/public/icons/sawn.svg'
 
 export const TableRow = (props: TableProduct) => {
   const { id, created, species, grade, drying_method, dimensions } = props
+
   return (
     <div
       className={
@@ -19,7 +20,9 @@ export const TableRow = (props: TableProduct) => {
 
           <div className={'flex gap-1'}>
             <span className={'text-2xs text-primary'}>{`#${id}`}</span>
-            <span className={'text-2xs text-metal'}>{created}</span>
+            <span className={'text-2xs text-metal'}>
+              {new Date(created).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </span>
           </div>
         </div>
       </div>

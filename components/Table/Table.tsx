@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { Product } from '@/app/new/schema'
-import { TableRow } from '@/components/Table/TableRow'
 import { TableEmptyRow } from '@/components/Table/TableEmptyRow'
+import { TableRow } from '@/components/Table/TableRow'
 
 export type TableProduct = Product & {
   id: number
@@ -10,13 +10,12 @@ export type TableProduct = Product & {
 }
 interface TableProps {
   products: TableProduct[]
-  className?: string
 }
 
-export const Table = ({ products, className }: TableProps) => {
+export const Table = ({ products }: TableProps) => {
   return (
-    <div className={className}>
-      <div className={'hidden w-full grid-cols-2 text-xs text-metal tablet:grid desktop:grid-cols-4'}>
+    <div>
+      <div className={'hidden w-full text-xs text-metal tablet:grid tablet:grid-cols-2 desktop:grid-cols-4'}>
         <span>Product (Species, Grade, Drying)</span>
         <span>Dimensions (Thickness x Width)</span>
       </div>

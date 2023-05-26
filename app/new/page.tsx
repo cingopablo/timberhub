@@ -5,26 +5,33 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
-import { z } from 'zod'
+import useSWRMutation from 'swr/mutation'
 
+import { options, Product, productSchema } from '@/app/new/schema'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { Select } from '@/components/Select'
+import { TableProduct } from '@/components/Table/Table'
 import dimensions from '@/public/icons/dimensions.svg'
 import sawn from '@/public/icons/sawn.svg'
 import specs from '@/public/icons/specs.svg'
-import { Product, productSchema, options } from '@/app/new/schema'
 
-const onSubmit = (product: Product) => {
-  console.log('onSubmit', product)
+async function sendRequest(url: string, { arg }: { arg: TableProduct }) {
+  return fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(arg),
+  })
 }
+
 export default function CreateProduct() {
   const { usage, species, drying, grade, treatment } = options
+  const { trigger } = useSWRMutation('/api', sendRequest)
   const {
     register,
     handleSubmit,
     control,
-    formState: { isSubmitting, isSubmitted, isDirty, isValid },
+    reset,
+    formState: { isSubmitting, isSubmitSuccessful, isValid },
   } = useForm<Product>({
     mode: 'onChange',
     resolver: zodResolver(productSchema), // Configuration the validation with the zod schema.
@@ -37,6 +44,18 @@ export default function CreateProduct() {
     name: 'dimensions',
     control,
   })
+
+  const onSubmit = async (product: Product) => {
+    await trigger({
+      id: Math.floor(Math.random() * 10099999) + 10013432,
+      created: new Date().getTime(),
+      ...product,
+    })
+
+    if (isSubmitSuccessful) {
+      reset()
+    }
+  }
 
   return (
     <div className={'flex flex-col gap-2 divide-y divide-border px-4 pt-4'}>
@@ -141,7 +160,7 @@ export default function CreateProduct() {
           </div>
         </div>
 
-        <div className={'flex justify-between bg-primary'}>
+        <div className={'flex justify-between pt-40'}>
           <Link href={'/'}>
             <Button variant={'ghost'}>Close</Button>
           </Link>

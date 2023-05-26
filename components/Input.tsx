@@ -4,22 +4,23 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string
   value?: string | number | undefined
   className?: string
+  classNameInput?: string
   addonStart?: React.ReactElement
   addonEnd?: React.ReactElement
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
-  { label, value, addonStart, addonEnd, disabled, className, ...other },
+  { label, value, addonStart, addonEnd, disabled, className, classNameInput, ...other },
   ref
 ) {
   return (
-    <div className={'flex flex-col gap-1'}>
+    <div className={`flex flex-col gap-1 ${className}`}>
       {label && (
         <label htmlFor={label} className={'text-lg'}>
           {label}
         </label>
       )}
-      <div className={`${styles.root} ${className}`}>
+      <div className={`${styles.root} ${classNameInput}`}>
         {addonStart ? <div className={`${styles.addon} mr-4 rounded-l-md`}>{addonStart}</div> : null}
         <input id={label} ref={ref} value={value} disabled={disabled} className={styles.input} {...other} />
         {addonEnd ? <div className={`${styles.addon} ml-4 rounded-r-md`}>end</div> : null}

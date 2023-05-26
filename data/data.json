@@ -1,41 +1,184 @@
 {
-  "rows": [{
-    "id": 10013432,
-    "created": 1660665689,
-    "usage": "Pallet/Packaging",
-    "species": "Spruce",
-    "drying_method": "KD",
-    "grade": "Nordic Blue Book",
-    "treatment": null,
-    "dimensions": [{
-      "thickness": 40,
-      "width": 50,
-      "length": 1300
-    },
-      {
-        "thickness": 50,
-        "width": 150,
-        "length": 2000
-      }
+    "rows": [
+        {
+            "id": 13902560,
+            "created": 1685117714381,
+            "usage": "Flooring",
+            "species": "Cedar",
+            "drying_method": "Kiln dried",
+            "grade": "A",
+            "treatment": "Stain and dye",
+            "dimensions": [
+                {
+                    "thickness": 20,
+                    "width": 50,
+                    "length": 100
+                }
+            ]
+        },
+        {
+            "id": 11778270,
+            "created": 1685117749722,
+            "usage": "Decking",
+            "species": "Mahogany",
+            "drying_method": "Kiln dried",
+            "grade": "A1",
+            "treatment": "Preserver",
+            "dimensions": [
+                {
+                    "thickness": 20,
+                    "width": 10,
+                    "length": 300
+                },
+                {
+                    "thickness": 50,
+                    "width": 80,
+                    "length": 100
+                },
+                {
+                    "thickness": 3212,
+                    "width": 45656,
+                    "length": 15661651
+                },
+                {
+                    "thickness": 321321321,
+                    "width": 32132132,
+                    "length": 56168181
+                },
+                {
+                    "thickness": 132132,
+                    "width": 651651,
+                    "length": 8181
+                }
+            ]
+        },
+        {
+            "id": 16540393,
+            "created": 1685118082841,
+            "usage": "Decking",
+            "species": "Cedar",
+            "drying_method": "Kiln dried",
+            "grade": "A1",
+            "treatment": "Stain and dye",
+            "dimensions": [
+                {
+                    "thickness": 10,
+                    "width": 20,
+                    "length": 500
+                }
+            ]
+        },
+        {
+            "id": 15695778,
+            "created": 1685118088391,
+            "usage": "Decking",
+            "species": "Cedar",
+            "drying_method": "Kiln dried",
+            "grade": "A1",
+            "treatment": "Stain and dye",
+            "dimensions": [
+                {
+                    "thickness": 10,
+                    "width": 20,
+                    "length": 500
+                }
+            ]
+        },
+        {
+            "id": 16155686,
+            "created": 1685118106274,
+            "usage": "Timber screens",
+            "species": "Mahogany",
+            "drying_method": "Air dried",
+            "grade": "A2",
+            "treatment": "Varnish",
+            "dimensions": [
+                {
+                    "thickness": 20,
+                    "width": 50,
+                    "length": 800
+                }
+            ]
+        },
+        {
+            "id": 15803673,
+            "created": 1685118200064,
+            "usage": "Decking",
+            "species": "Mahogany",
+            "drying_method": "Kiln dried",
+            "grade": "A1",
+            "treatment": "Preserver",
+            "dimensions": [
+                {
+                    "thickness": 20,
+                    "width": 50,
+                    "length": 5000
+                }
+            ]
+        },
+        {
+            "id": 16888721,
+            "created": 1685118202768,
+            "usage": "Decking",
+            "species": "Mahogany",
+            "drying_method": "Kiln dried",
+            "grade": "A1",
+            "treatment": "Preserver",
+            "dimensions": [
+                {
+                    "thickness": 20,
+                    "width": 50,
+                    "length": 5000
+                }
+            ]
+        },
+        {
+            "id": 11664998,
+            "created": 1685118245511,
+            "usage": "Timber screens",
+            "species": "Mahogany",
+            "drying_method": "Air dried",
+            "grade": "A1",
+            "treatment": "Stain and dye",
+            "dimensions": [
+                {
+                    "thickness": 2,
+                    "width": 50,
+                    "length": 1000
+                }
+            ]
+        },
+        {
+            "id": 13983559,
+            "created": 1685118451133,
+            "usage": "Decking",
+            "species": "Mahogany",
+            "drying_method": "Kiln dried",
+            "grade": "A2",
+            "treatment": "Preserver",
+            "dimensions": [
+                {
+                    "thickness": 123,
+                    "width": 132,
+                    "length": 132
+                }
+            ]
+        },
+        {
+            "id": 17152308,
+            "created": 1685118457684,
+            "usage": "Decking",
+            "species": "Mahogany",
+            "drying_method": "Kiln dried",
+            "grade": "A2",
+            "treatment": "Preserver",
+            "dimensions": [
+                {
+                    "thickness": 123,
+                    "width": 132,
+                    "length": 132
+                }
+            ]
+        }
     ]
-  }, {
-    "id": 10013433,
-    "created": 1660665689,
-    "usage": "Pallet/Packaging",
-    "species": "Spruce",
-    "drying_method": "KD",
-    "grade": "Nordic Blue Book",
-    "treatment": null,
-    "dimensions": [{
-      "thickness": 40,
-      "width": 50,
-      "length": 1300
-    },
-      {
-        "thickness": 50,
-        "width": 150,
-        "length": 2000
-      }
-    ]
-  }]
 }
