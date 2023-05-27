@@ -44,7 +44,7 @@ export default function ProductPage() {
     control,
     reset,
     getValues,
-    formState: { isSubmitting, defaultValues, errors, isValid },
+    formState: { isSubmitting, defaultValues, isValid },
   } = useForm<Product>({
     mode: 'onSubmit',
     resolver: zodResolver(productSchema),
@@ -52,8 +52,6 @@ export default function ProductPage() {
       dimensions: [{}],
     },
   })
-
-  console.log(errors)
 
   const { fields, append, remove } = useFieldArray({
     name: 'dimensions',
@@ -80,7 +78,10 @@ export default function ProductPage() {
   }, [loadedProduct])
 
   return (
-    <div className={'flex flex-1 flex-col px-6 pb-6 pt-4'}>
+    <div
+      className={
+        'fixed inset-0 flex flex-1 flex-col bg-white px-6 pb-6 pt-4 tablet:inset-y-0 tablet:left-1/4 tablet:right-0'
+      }>
       <div className={'flex items-center justify-between border-b border-border pb-2'}>
         <span className={'text-2xl'}>{readOnly ? 'Product Overview' : 'Create Product'}</span>
         {showCompleted && <span className={'bg-primary px-4 py-2'}>New Product Created!</span>}

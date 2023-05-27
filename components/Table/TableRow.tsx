@@ -20,7 +20,7 @@ export const TableRow = (props: Product) => {
   const { trigger } = useSWRMutation('/api', remove)
 
   return (
-    <Link href={`/product?id=${id}`}>
+    <Link href={`/?id=${id}`}>
       <div
         className={
           'grid w-full cursor-pointer grid-cols-2 items-center justify-between p-4 transition duration-150 hover:bg-gray/5 tablet:grid-cols-3 desktop:grid-cols-4'

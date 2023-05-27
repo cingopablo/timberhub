@@ -20,7 +20,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(function Inp
           {label}
         </label>
       )}
-      <div className={`${styles.root} ${disabled && 'ring-opacity-0 hover:ring-gray/0'} ${classNameInput}`}>
+      <div className={`${styles.root} ${disabled && '!ring-opacity-0 hover:!ring-gray/0'} ${classNameInput}`}>
         {addonStart ? <div className={`${styles.addon} mr-4 rounded-l-md`}>{addonStart}</div> : null}
         <input id={label} ref={ref} value={value} disabled={disabled} className={styles.input} {...other} />
         {addonEnd ? <div className={`${styles.addon} ml-4 rounded-r-md`}>end</div> : null}

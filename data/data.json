@@ -1,78 +1,57 @@
 {
   "rows": [
     {
-      "id": 10013432,
-      "created": 1660665689,
       "usage": "Pallet/Packaging",
-      "species": "Spruce",
+      "species": "Cedar",
       "drying_method": "Kiln dried",
-      "grade": "Nordic Blue Book",
-      "treatment": "Varnish",
-      "dimensions": [
-        {
-          "thickness": 40,
-          "width": 50,
-          "length": 1300
-        },
-        {
-          "thickness": 50,
-          "width": 150,
-          "length": 2000
-        }
-      ]
-    },
-    {
-      "id": 10013433,
-      "created": 1660665689,
-      "usage": "Pallet/Packaging",
-      "species": "Spruce",
-      "drying_method": "Air dried",
-      "grade": "Nordic Blue Book",
-      "treatment": "Oil",
-      "dimensions": [
-        {
-          "thickness": 40,
-          "width": 50,
-          "length": 1300
-        },
-        {
-          "thickness": 50,
-          "width": 150,
-          "length": 2000
-        }
-      ]
-    },
-    {
-      "usage": "Pallet/Packaging",
-      "species": "Alder",
-      "drying_method": "Kiln dried",
-      "grade": "Nordic Blue Book",
+      "grade": "A1",
       "treatment": "Preserver",
       "dimensions": [
         {
-          "thickness": 6500,
-          "width": 5050,
-          "length": 50505
+          "thickness": 10,
+          "width": 20,
+          "length": 50
         }
       ],
-      "id": 15584253,
-      "created": 1685194312291
+      "id": 18562523,
+      "created": 1685200307229
     },
     {
-      "usage": "Decking",
-      "species": "Alder",
+      "usage": "Pallet/Packaging",
+      "species": "Mahogany",
       "drying_method": "Air dried",
-      "grade": "A",
-      "treatment": "Stain and dye",
+      "grade": "A2",
+      "treatment": "Varnish",
       "dimensions": [
         {
-          "thickness": 50,
-          "width": 300,
-          "length": 323
+          "thickness": 20,
+          "width": 500,
+          "length": 9000
         }
       ],
-      "id": 14243820,
-      "created": 1685194522352
+      "id": 14822400,
+      "created": 1685200401657
+    },
+    {
+      "usage": "Timber screens",
+      "species": "Mahogany",
+      "drying_method": "Kiln dried",
+      "grade": "A",
+      "treatment": "Preserver",
+      "dimensions": [
+        {
+          "thickness": 8888,
+          "width": 676,
+          "length": 66666
+        },
+        {
+          "thickness": 565,
+          "width": 6565,
+          "length": 4545
+        }
+      ],
+      "id": 11029294,
+      "created": 1685200430513
     }
   ]
 }
