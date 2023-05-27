@@ -1,15 +1,11 @@
 import React from 'react'
 
-import { Product } from '@/app/new/schema'
-import { TableEmptyRow } from '@/components/Table/TableEmptyRow'
-import { TableRow } from '@/components/Table/TableRow'
+import { Product } from '@/app/schema'
 
-export type TableProduct = Product & {
-  id: number
-  created: number
-}
+import { TableEmptyRow } from './TableEmptyRow'
+import { TableRow } from './TableRow'
 interface TableProps {
-  products: TableProduct[]
+  products: Product[]
 }
 
 export const Table = ({ products }: TableProps) => {
@@ -20,7 +16,7 @@ export const Table = ({ products }: TableProps) => {
         <span className={'hidden tablet:block'}>Dimensions (Thickness x Width)</span>
         <span className={'text-right tablet:text-left'}>Delete</span>
       </div>
-      <div className={'flex flex-col divide-y divide-border'}>
+      <div className={'flex max-h-[80vh] flex-col divide-y divide-border overflow-y-auto'}>
         {products.length > 0 ? products.map(product => <TableRow key={product.id} {...product} />) : <TableEmptyRow />}
       </div>
     </div>

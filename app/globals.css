@@ -5,20 +5,17 @@
 :root {
   --foreground-rgb: 0, 0, 0;
   --background: 255, 255, 255;
-  --base-primary: 159deg 72%;
-  --primary-00: hsl(var(--base-primary) 100%);
-  --primary-100: hsl(var(--base-primary) 90%);
-  --primary-200: hsl(var(--base-primary) 80%);
-  --primary-300: hsl(var(--base-primary) 70%);
-  --primary-400: hsl(var(--base-primary) 60%);
-  --primary-500: hsl(var(--base-primary) 50%);
-  --primary-600: hsl(var(--base-primary) 40%);
-  --primary-700: hsl(var(--base-primary) 30%);
-  --primary-800: hsl(var(--base-primary) 20%);
-  --primary-900: hsl(var(--base-primary) 10%);
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background));
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main {
+  flex: 1
 }

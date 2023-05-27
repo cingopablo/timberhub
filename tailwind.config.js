@@ -13,7 +13,7 @@ module.exports = {
     colors: {
       white: '#FFFFFF',
       primary: '#23D899',
-      'primary-light': 'var(--primary-400)',
+      'primary-light': '#50E2AF',
       'primary-dark': '#20BE87',
       black: '#000000',
       gray: '#939393',
@@ -39,10 +39,6 @@ module.exports = {
       '2xl': ['33px', { lineHeight: '55px', fontWeight: 700 }],
     },
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
       gridTemplateColumns: {
         new: 'auto 1',
       },

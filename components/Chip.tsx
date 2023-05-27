@@ -6,16 +6,9 @@ interface ChipProps {
   className?: string
 }
 
-export const Chip = ({ label, count, className }: ChipProps) => {
-  return (
-    <span className={`${styles.base} ${className}`}>
-      {count && <div className={styles.counter}>{count}</div>}
-      {label}
-    </span>
-  )
-}
-
-const styles = {
-  base: 'flex gap-2 text-xs px-2 py-1 bg-chip-background text-chip-color w-fit rounded-md',
-  counter: 'text-metal',
-}
+export const Chip = ({ label, count, className }: ChipProps) => (
+  <span className={`flex w-fit gap-2 rounded-md bg-chip-background px-2 py-1 text-xs text-chip-color ${className}`}>
+    {count && <div className={'text-metal'}>{count}</div>}
+    {label}
+  </span>
+)

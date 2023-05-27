@@ -1,5 +1,4 @@
 'use client'
-
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons'
 import React from 'react'
@@ -8,11 +7,12 @@ interface SelectProps {
   label?: string
   helper?: string
   value?: string
+  disabled?: boolean
   options: readonly string[]
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(function Select(
-  { label, helper, value, options, ...props },
+  { label, helper, value, disabled, options, ...props },
   ref
 ) {
   return (
@@ -22,19 +22,22 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(function 
           {label}
         </label>
       )}
-      <Listbox value={value} {...props} ref={ref}>
+      <Listbox disabled={disabled} value={value} {...props} ref={ref}>
         <div className={'relative mt-1 text-m'}>
           <Listbox.Button
             id={label}
+            aria-disabled={disabled}
             className={
-              'relative w-full cursor-pointer rounded-md px-4 py-2 text-left ring-1 ring-inset ring-border hover:ring-gray/60 focus:outline-none focus:ring-primary focus-visible:ring-primary active:ring-gray/80'
+              'relative w-full cursor-pointer rounded-md px-4 py-2 text-left ring-1 ring-inset ring-border hover:ring-gray/60 focus:outline-none focus:ring-primary focus-visible:ring-primary active:ring-gray/80 aria-disabled:cursor-default aria-disabled:ring-gray/0'
             }>
             <span className={`block truncate ${value ? 'text font-bold' : 'font-normal text-gray'}`}>
               {value ?? 'Select'}
             </span>
-            <span className={'pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'}>
-              <ChevronDownIcon className={'h-5 w-5 text-primary'} aria-hidden={'true'} />
-            </span>
+            {!disabled && (
+              <span className={'pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'}>
+                <ChevronDownIcon className={'h-5 w-5 text-primary'} aria-hidden={'true'} />
+              </span>
+            )}
           </Listbox.Button>
           <Transition
             as={React.Fragment}
@@ -57,11 +60,11 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(function 
                   {({ selected }) => (
                     <React.Fragment>
                       <span className={`block truncate ${selected ? 'text-black' : 'text-gray'}`}>{option}</span>
-                      {selected ? (
+                      {selected && (
                         <span className={'absolute inset-y-0 right-4 flex items-center pl-3 text-primary'}>
                           <CheckIcon className={'h-5 w-5'} aria-hidden={'true'} />
                         </span>
-                      ) : null}
+                      )}
                     </React.Fragment>
                   )}
                 </Listbox.Option>
