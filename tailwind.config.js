@@ -38,11 +38,6 @@ module.exports = {
       xl: ['24px', { lineHeight: '40px', fontWeight: 600 }],
       '2xl': ['33px', { lineHeight: '55px', fontWeight: 700 }],
     },
-    extend: {
-      gridTemplateColumns: {
-        new: 'auto 1',
-      },
-    },
   },
   plugins: [],
 }

@@ -19,17 +19,18 @@ export const TableRow = (props: Product) => {
   const { id, created, species, grade, drying_method, dimensions } = props
   const { trigger } = useSWRMutation('/api', remove)
 
+  const dimensionsCount = dimensions.length
+
   return (
     <Link href={`/?id=${id}`}>
       <div
         className={
-          'grid w-full cursor-pointer grid-cols-2 items-center justify-between p-4 transition duration-150 hover:bg-gray/5 tablet:grid-cols-3 desktop:grid-cols-4'
+          'grid w-full cursor-pointer grid-cols-2 items-center justify-between gap-6 p-4 transition duration-150 hover:bg-gray/5 tablet:grid-cols-3 desktop:grid-cols-4'
         }>
         <div className={'flex items-center gap-4'}>
           <Image src={sawn} alt={'Sawn Timber'} className={'h-8 w-8'} />
           <div className={'flex flex-col'}>
             <span className={'text-sm'}>{`${species}, ${grade}, ${drying_method}`}</span>
-
             <div className={'flex gap-1'}>
               <span className={'text-2xs text-primary'}>{`#${id}`}</span>
               <span className={'text-2xs text-metal'}>
@@ -39,11 +40,11 @@ export const TableRow = (props: Product) => {
           </div>
         </div>
 
-        <div className={'hidden tablet:flex tablet:gap-3'}>
+        <div className={'hidden tablet:flex tablet:flex-wrap tablet:gap-3'}>
           {dimensions.slice(0, 3).map(({ thickness, width }, index) => (
             <Chip key={index} count={index + 1} label={`${thickness}x${width}`} />
           ))}
-          {dimensions.length > 3 && <Chip label={'+ 5 more sets'} />}
+          {dimensionsCount > 3 && <Chip label={`+ ${dimensionsCount - 3} more sets`} />}
         </div>
 
         <div className={'ml-auto tablet:mx-0 tablet:items-start'}>
@@ -54,7 +55,8 @@ export const TableRow = (props: Product) => {
               if (id) {
                 await trigger(id)
               }
-            }}>
+            }}
+            className={'!p-0'}>
             <TrashIcon className={'h-6 w-6'} />
           </Button>
         </div>

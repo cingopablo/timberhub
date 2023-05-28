@@ -11,7 +11,7 @@ interface TableProps {
 export const Table = ({ products }: TableProps) => {
   return (
     <div>
-      <div className={'grid w-full grid-cols-2 px-4 text-xs text-metal tablet:grid-cols-3 desktop:grid-cols-4'}>
+      <div className={'grid w-full grid-cols-2 gap-6 px-4 text-xs text-metal tablet:grid-cols-3 desktop:grid-cols-4'}>
         <span>Product (Species, Grade, Drying)</span>
         <span className={'hidden tablet:block'}>Dimensions (Thickness x Width)</span>
         <span className={'text-right tablet:text-left'}>Delete</span>

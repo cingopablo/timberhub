@@ -33,25 +33,108 @@
       "created": 1685200401657
     },
     {
-      "usage": "Timber screens",
+      "usage": "Decking",
       "species": "Mahogany",
       "drying_method": "Kiln dried",
       "grade": "A",
-      "treatment": "Preserver",
+      "treatment": "Stain and dye",
       "dimensions": [
         {
-          "thickness": 8888,
-          "width": 676,
-          "length": 66666
+          "thickness": 10,
+          "width": 20,
+          "length": 50
         },
         {
-          "thickness": 565,
-          "width": 6565,
-          "length": 4545
+          "thickness": 10,
+          "width": 20,
+          "length": 30
         }
       ],
-      "id": 11029294,
-      "created": 1685200430513
+      "id": 14372634,
+      "created": 1685258479944
+    },
+    {
+      "usage": "Flooring",
+      "species": "Oak",
+      "drying_method": "Air dried",
+      "grade": "A",
+      "treatment": "Oil",
+      "dimensions": [
+        {
+          "thickness": 10,
+          "width": 10,
+          "length": 10
+        }
+      ],
+      "id": 15593720,
+      "created": 1685258575046
+    },
+    {
+      "usage": "Flooring",
+      "species": "Oak",
+      "drying_method": "Kiln dried",
+      "grade": "A",
+      "treatment": "Stain and dye",
+      "dimensions": [
+        {
+          "thickness": 10,
+          "width": 20,
+          "length": 30
+        },
+        {
+          "thickness": 16,
+          "width": 28,
+          "length": 50
+        },
+        {
+          "thickness": 11,
+          "width": 55,
+          "length": 61
+        },
+        {
+          "thickness": 123,
+          "width": 65478,
+          "length": 1212
+        }
+      ],
+      "id": 15416072,
+      "created": 1685259296590
+    },
+    {
+      "usage": "Flooring",
+      "species": "Cedar",
+      "drying_method": "Kiln dried",
+      "grade": "Nordic Blue Book",
+      "treatment": "Varnish",
+      "dimensions": [
+        {
+          "thickness": 10,
+          "width": 20,
+          "length": 30
+        },
+        {
+          "thickness": 20,
+          "width": 30,
+          "length": 40
+        },
+        {
+          "thickness": 50,
+          "width": 60,
+          "length": 70
+        },
+        {
+          "thickness": 80,
+          "width": 90,
+          "length": 100
+        },
+        {
+          "thickness": 200,
+          "width": 300,
+          "length": 400
+        }
+      ],
+      "id": 10388468,
+      "created": 1685259421259
     }
   ]
 }

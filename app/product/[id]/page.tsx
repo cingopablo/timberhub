@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { TrashIcon } from '@radix-ui/react-icons'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import React from 'react'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import useSWR from 'swr'
@@ -29,9 +29,9 @@ async function create(url: string, { arg }: { arg: Product }) {
 
 export default function ProductPage() {
   const { trigger } = useSWRMutation('/api', create)
-  const [showCompleted, setShowCompleted] = React.useState(false)
   const { usage, species, drying, grade, treatment } = options
   const search = useSearchParams()
+  const router = useRouter()
 
   const { data } = useSWR(`/api?id=${search.get('id')}`, fetcher)
 
@@ -61,15 +61,8 @@ export default function ProductPage() {
   const onSubmit = async (product: Product) => {
     reset(defaultValues)
     await trigger({ ...product, id: randomId(), created: new Date().getTime() })
-    setShowCompleted(true)
+    router.replace('/')
   }
-
-  React.useEffect(() => {
-    const timer = setTimeout(() => setShowCompleted(false), 3000)
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [showCompleted])
 
   React.useEffect(() => {
     if (loadedProduct) {
@@ -82,11 +75,8 @@ export default function ProductPage() {
       className={
         'fixed inset-0 flex flex-1 flex-col bg-white px-6 pb-6 pt-4 tablet:inset-y-0 tablet:left-1/4 tablet:right-0'
       }>
-      <div className={'flex items-center justify-between border-b border-border pb-2'}>
-        <span className={'text-2xl'}>{readOnly ? 'Product Overview' : 'Create Product'}</span>
-        {showCompleted && <span className={'bg-primary px-4 py-2'}>New Product Created!</span>}
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)} className={'flex flex-1 flex-col'}>
+      <span className={'border-b border-border pb-2 text-2xl'}>{readOnly ? 'Product Overview' : 'Create Product'}</span>
+      <form onSubmit={handleSubmit(onSubmit)} className={'flex flex-1 flex-col overflow-y-auto'}>
         <div className={'flex flex-col gap-10 divide-y divide-border last:divide-primary'}>
           <div className={'flex flex-col items-start gap-5 pt-10'}>
             <div className={'flex w-full gap-4'}>
@@ -157,7 +147,7 @@ export default function ProductPage() {
                 )}
               </div>
             </div>
-            <div className={'grid w-full gap-8 tablet:pl-12'}>
+            <div className={'mb-10 grid w-full gap-8 tablet:pl-12'}>
               {fields.map((field, index) => {
                 const isRemovable = index > 0 && !readOnly
                 return (
